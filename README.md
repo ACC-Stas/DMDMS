@@ -176,6 +176,8 @@ Position can be enum.
 | description | TEXT | NO ||NULL||
 | cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
 | quantity | INT | NO | MUL |NULL| POSITIVE |
+| center_id | INT | NO | MUL |NULL|  |
+
 
 
 ### StockPharmacy
@@ -189,4 +191,5 @@ Position can be enum.
 | on_prescription | ENUM('YES', 'NO') | NO ||NULL||
 | cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
 | quantity | INT | NO | MUL |NULL| POSITIVE |
+| center_id | INT | NO | MUL |NULL|  |
 
