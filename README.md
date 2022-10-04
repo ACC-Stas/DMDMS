@@ -58,3 +58,126 @@ DMDMS располагает рядом центров по всей терри�
     - Предоставить общее количество пациентов в каждом центре, упорядочить по номеру центра.
     - Перечислить количество криогенны камер каждого типа в каждом центре, упорядочить по номеру центра.
     - Предоставить отчет с перечнем фармацевтических средств, которые необходимо заказать в каждом центре, упорядочить по номеру центра.
+
+# Database design, pt.1: Not normalized
+
+## Attributes
+
+| Entity  | Attributes  |
+|:------------- |:--------------- |
+| Center        | id, address (street, city, state), tel, fax |
+| Staff         | id, name (first_name, middle_name, last_name), address (street, city, state), tel, email, IIN, sex, position, salary|
+| Patient       | id, name (first_name, middle_name, last_name), address (street, city, state), tel, email, sex, registration_date|
+| Examination   | id, date and time, doctor_id, patient_id, results, treatment_id|
+| Treatment     | id, description, cost        |
+| СryogenicСhamber | id, size, status, patient_id        |
+| Invoice          | id, date_issue, date_paid, payment_method, treatment_id       |
+| StockItem        | id, name, description, cost, quantity       |
+| StockPharmacy    | id, name, description, dosage, method_admin, cost, quantity        |
+
+## Entities
+
+### Center
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| street | VARCHAR(50) | NO ||NULL||
+| city | VARCHAR(50) | NO ||NULL||
+| home | VARCHAR(50) | NO ||NULL||
+| tel | CHAR(13) | NO ||NULL||
+| fax | VARCHAR(50) | NO ||NULL||
+
+### Staff
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int    | NO | PRI | NULL | AUTO_INCREMENT |
+| first_name  | VARCHAR(50) | NO ||NULL||
+| middle_name | VARCHAR(50) | NO ||""||
+| last_name   | VARCHAR(50) | NO ||NULL||
+| street | VARCHAR(50) | NO ||NULL||
+| city | VARCHAR(50) | NO ||NULL||
+| home | VARCHAR(50) | NO ||NULL||
+| sex | ENUM('M', 'W') | NO ||NULL||
+| tel | CHAR(13) | NO ||NULL||
+| email | VARCHAR(50) | NO ||NULL||
+| iin | CHAR(6) | NO ||NULL||
+| position | VARCHAR(50) | NO ||NULL||
+| salary | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
+| center_id | INT | NO | MUL |NULL| |
+
+Position can be enum.
+
+### Patient
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int    | NO | PRI | NULL | AUTO_INCREMENT |
+| first_name  | VARCHAR(50) | NO ||NULL||
+| middle_name | VARCHAR(50) | NO ||""||
+| last_name   | VARCHAR(50) | NO ||NULL||
+| street | VARCHAR(50) | NO ||NULL||
+| city | VARCHAR(50) | NO ||NULL||
+| home | VARCHAR(50) | NO ||NULL||
+| sex | ENUM('M', 'W') | NO ||NULL||
+| tel | CHAR(13) | NO ||NULL||
+| email | VARCHAR(50) | NO ||NULL||
+| iin | CHAR(6) | NO ||NULL||
+| registration_date | DATE | NO | |NULL| |
+| center_id | INT | NO | MUL |NULL| |
+
+
+### Examination
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| time | DATETIME | NO ||NULL||
+| doctor_id | int | NO |MUL|NULL||
+| patient_id | int | NO |MUL|NULL||
+| results | TEXT | NO ||NULL||
+| treatment_id | int | NO |MUL|NULL||
+
+### СryogenicСhamber
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| size | ENUM('HEAD', 'SMALL', 'MEDIUM', 'LARGE') | NO ||NULL||
+| status | ENUM('OCCUPIED', 'FREE') | NO ||NULL||
+| patient_id | int | YES |MUL|NULL||
+
+### Invoice
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| date_issue | DATE | NO ||NULL||
+| date_paid | DATE | YES ||NULL||
+| payment_method | ENUM('CARD', 'CASH', 'CHECK') | NO ||NULL||
+| treatment_id | INT | NO | MUL |NULL||
+
+### StockItem
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| name | VARCHAR(50) | NO ||NULL||
+| description | TEXT | NO ||NULL||
+| cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
+| quantity | INT | NO | MUL |NULL| POSITIVE |
+
+
+### StockPharmacy
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| name | VARCHAR(50) | NO ||NULL||
+| description | TEXT | NO ||NULL||
+| dosage | TEXT | NO ||NULL||
+| on_prescription | ENUM('YES', 'NO') | NO ||NULL||
+| cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
+| quantity | INT | NO | MUL |NULL| POSITIVE |
+
