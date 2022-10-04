@@ -138,6 +138,7 @@ Position can be enum.
 | patient_id | int | NO |MUL|NULL||
 | results | TEXT | NO ||NULL||
 | treatment_id | int | NO |MUL|NULL||
+| invoice_id | int | NO |MUL|NULL||
 
 ### Treatment
 
@@ -165,7 +166,6 @@ Position can be enum.
 | date_issue | DATE | NO ||NULL||
 | date_paid | DATE | YES ||NULL||
 | payment_method | ENUM('CARD', 'CASH', 'CHECK') | NO ||NULL||
-| treatment_id | INT | NO | MUL |NULL||
 
 ### StockItem
 
