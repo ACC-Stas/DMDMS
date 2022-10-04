@@ -193,3 +193,7 @@ Position can be enum.
 | quantity | INT | NO | MUL |NULL| POSITIVE |
 | center_id | INT | NO | MUL |NULL|  |
 
+## Database Information Scheme 
+
+![Database Information Model](https://user-images.githubusercontent.com/79222536/193947014-9942b2fa-3543-4628-8c82-be297c7cb6d2.png)
+
