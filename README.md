@@ -69,7 +69,7 @@ DMDMS располагает рядом центров по всей терри�
 | Staff         | id, name (first_name, middle_name, last_name), address (street, city, state), tel, email, IIN, sex, position, salary|
 | Patient       | id, name (first_name, middle_name, last_name), address (street, city, state), tel, email, sex, registration_date|
 | Examination   | id, date and time, doctor_id, patient_id, results, treatment_id|
-| Treatment     | id, description, cost        |
+| Treatment     | id, description, doctor_id, cost        |
 | СryogenicСhamber | id, size, status, patient_id        |
 | Invoice          | id, date_issue, date_paid, payment_method, treatment_id       |
 | StockItem        | id, name, description, cost, quantity       |
@@ -138,6 +138,15 @@ Position can be enum.
 | patient_id | int | NO |MUL|NULL||
 | results | TEXT | NO ||NULL||
 | treatment_id | int | NO |MUL|NULL||
+
+### Treatment
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| description | TEXT | NO ||NULL||
+| doctor_id | INT | NO |MUL|NULL||
+| cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
 
 ### СryogenicСhamber
 
