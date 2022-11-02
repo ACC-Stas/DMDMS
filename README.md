@@ -226,9 +226,9 @@ Position can be enum.
 | Field         | Type            | Null            | Key             | Default         | Extra           |
 |:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
 | id | int    | NO | PRI | NULL | AUTO_INCREMENT |
-| fullname_id  | VARCHAR(50) | NO ||NULL||
-| address_id | VARCHAR(50) | NO ||""||
-| contact_id  | VARCHAR(50) | NO ||NULL| UNIQUE |
+| fullname_id  | int | NO | MUL |NULL||
+| address_id | int | NO | MUL |NULL||
+| contact_id  | int | NO | MUL |NULL| UNIQUE |
 | sex | ENUM('M', 'W') | NO ||NULL||
 | registration_date | DATE | NO | |NULL| CHECK(registration_date <= CURRENT_DATE)|
 
@@ -261,6 +261,7 @@ Position can be enum.
 | size | ENUM('HEAD', 'SMALL', 'MEDIUM', 'LARGE') | NO ||NULL||
 | status | ENUM('OCCUPIED', 'FREE') | NO ||NULL||
 | patient_id | int | YES | MUL |NULL| UNIQUE |
+| center_id | INT | NO | MUL |NULL|  |
 
 ### Invoice
 
@@ -328,3 +329,4 @@ Position can be enum.
 ## Logical Database Schema 
 
 ![Logical Database Schema](https://user-images.githubusercontent.com/79222536/199508369-49fdb5b7-8f60-4555-afc7-9cb776831443.png)
+![Logical Database Schema (2)](https://user-images.githubusercontent.com/79222536/199528428-48a4332e-45c5-467b-9e37-81c17c06b9d1.png)
