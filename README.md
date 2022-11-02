@@ -37,14 +37,10 @@ DMDMS располагает рядом центров по всей терри�
     - Система ролей (Admin, Manager, Stuff).
     - Журналирование действий пользователя.
   
-2. Функции создания записей и их изменения:
-    - Создание и храние записей, содержащих информацию о медицинских центрах DMDMS и их сотрудниках. (Admin)
-    - Создание и храние записей, содержащих информацию о пациентах. (Admin, Manager)
-    - Создание и храние записей, содержащих сведения о типах лечения. (Admin, Manager, Stuff)
-    - Создание и храние записей, содержащих сведения о проведённых обследованиях. (Admin, Manager, Stuff)
-    - Создание и храние записей, содержащих сведения о счетах за лечение. (Admin, Manager, Stuff)
-    - Создание и храние записей, содержащих сведения о запасах в каждой из клиник. (Admin, Manager, Stuff)
-    - Создание и храние записей, содержащих сведения о криогенных камерах. (Admin, Manager, Stuff)
+2. Функции создания записей и их изменения:  
+    i. Admin: CRUD Center, Stuff, Patient, Examination, Treatment, Invoice, StockItem, StockPharmacy, CryogenicChamber  
+    ii. Manager: CRUD Patient, Examination, Treatment, Invoice, StockItem, StockPharmacy, RU CryogenicChamber  
+    iii. Stuff: CR Treatment, Examination, Invoice, CRUD StockItem, StockPharmacy, R CryogenicChamber  
 
 3. Должны быть реализованы следующие запросы к базе данных:
     - Предоставить отчет с указанием имени менеджера, адреса клиники и номера телефона для каждой клиники, упорядоченных по номеру центра.
@@ -106,6 +102,7 @@ DMDMS располагает рядом центров по всей терри�
 | position | VARCHAR(50) | NO ||NULL||
 | salary | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
 | center_id | INT | NO | MUL |NULL| |
+| role | ENUM("Admin", "Manager", "Stuff") | NO ||NULL||
 
 Position can be enum.
 
@@ -197,3 +194,137 @@ Position can be enum.
 
 ![Database Information Model](https://user-images.githubusercontent.com/79222536/193947014-9942b2fa-3543-4628-8c82-be297c7cb6d2.png)
 
+# Database design, pt.2: Normalized
+
+### Center
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| address_id | INT | NO | MUL |NULL| UNIQUE |
+| contact_id | INT | NO | MUL |NULL| UNIQUE |
+
+### Staff
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int    | NO | PRI | NULL | AUTO_INCREMENT |
+| fullname_id  | INT | NO | MUL |NULL||
+| address_id | INT | NO | MUL |NULL||
+| contact_id | INT | NO | MUL |NULL| UNIQUE |
+| sex | ENUM('M', 'W') | NO ||NULL||
+| iin | CHAR(6) | NO ||NULL| UNIQUE |
+| position | VARCHAR(50) | NO ||NULL||
+| salary | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
+| center_id | INT | NO | MUL |NULL| |
+| role | ENUM("Admin", "Manager", "Stuff") | NO ||NULL||
+
+Position can be enum.
+
+### Patient
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int    | NO | PRI | NULL | AUTO_INCREMENT |
+| fullname_id  | VARCHAR(50) | NO ||NULL||
+| address_id | VARCHAR(50) | NO ||""||
+| contact_id  | VARCHAR(50) | NO ||NULL| UNIQUE |
+| sex | ENUM('M', 'W') | NO ||NULL||
+| registration_date | DATE | NO | |NULL| CHECK(registration_date <= CURRENT_DATE)|
+
+
+### Examination
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| time | DATETIME | NO ||NULL| CHECK(time <= CURRENT_TIME)|
+| doctor_id | int | NO |MUL|NULL||
+| patient_id | int | NO |MUL|NULL||
+| results | TEXT | NO ||NULL||
+
+### Treatment
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| description | TEXT | NO ||NULL||
+| doctor_id | INT | NO |MUL|NULL||
+| invoice_id | int | NO |MUL|NULL| UNIQUE |
+| examination_id | int | NO |MUL|NULL||
+
+### СryogenicСhamber
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| size | ENUM('HEAD', 'SMALL', 'MEDIUM', 'LARGE') | NO ||NULL||
+| status | ENUM('OCCUPIED', 'FREE') | NO ||NULL||
+| patient_id | int | YES | MUL |NULL| UNIQUE |
+
+### Invoice
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| date_issue | DATE | NO ||NULL| CHECK(date_paid <= CURRENT_DATE)|
+| date_paid | DATE | YES ||NULL| CHECK(date_paid <= CURRENT_DATE)|
+| cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
+| payment_method | ENUM('CARD', 'CASH', 'CHECK') | YES ||NULL||
+
+### StockItem
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| name | VARCHAR(50) | NO ||NULL| UNIQUE |
+| description | TEXT | NO ||NULL||
+| cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
+| quantity | INT | NO | MUL |NULL| POSITIVE |
+| center_id | INT | NO | MUL |NULL|  |
+
+
+
+### StockPharmacy
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| name | VARCHAR(50) | NO ||NULL| UNIQUE |
+| description | TEXT | NO ||NULL||
+| dosage | TEXT | NO ||NULL||
+| on_prescription | ENUM('YES', 'NO') | NO ||NULL||
+| cost | DECIMAL(10, 2) | NO ||NULL| POSITIVE |
+| quantity | INT | NO | MUL |NULL| POSITIVE |
+| center_id | INT | NO | MUL |NULL| |
+
+### Address
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| city | VARCHAR(50) | NO ||NULL||
+| street | VARCHAR(50) | NO ||NULL||
+| home | VARCHAR(50) | NO ||NULL||
+
+### Fullname
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| first_name  | VARCHAR(50) | NO ||NULL||
+| middle_name | VARCHAR(50) | NO ||""||
+| last_name   | VARCHAR(50) | NO ||NULL||
+
+### Contact
+
+| Field         | Type            | Null            | Key             | Default         | Extra           |
+|:------------- |:--------------- |:--------------- |:--------------- |:--------------- |:--------------- |
+| id | int  | NO | PRI | NULL | AUTO_INCREMENT |
+| tel | CHAR(13) | NO ||NULL||
+| email | VARCHAR(50) | NO ||NULL||
+| fax | VARCHAR(50) | YES ||NULL||
+
+## Logical Database Schema 
+
+![Logical Database Schema](https://user-images.githubusercontent.com/79222536/199508369-49fdb5b7-8f60-4555-afc7-9cb776831443.png)
