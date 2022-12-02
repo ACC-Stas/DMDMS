@@ -61,6 +61,9 @@ END IF;
 IF NEW.date_paid IS NOT NULL AND NEW.date_paid > CURDATE() THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid date paid';
 END IF;
 
+IF NEW.date_paid IS NOT NULL AND NEW.date_paid < NEW.date_issue THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Date paid < date issue';
+END IF;
+
 END //
 
 CREATE TRIGGER date_check_invoice_update

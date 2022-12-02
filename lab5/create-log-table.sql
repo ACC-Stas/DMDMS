@@ -1,0 +1,28 @@
+CREATE TABLE Logs
+(
+  id int NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  operation ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
+  tablename VARCHAR(50) NOT NULL,
+  description TEXT NOT NULL,
+  time DATETIME NOT NULL,
+  CONSTRAINT PK_Logs PRIMARY KEY (id)
+);
+
+
+DELIMITER //  
+
+CREATE TRIGGER date_check_logs_insert
+BEFORE INSERT ON Logs
+FOR EACH ROW
+BEGIN
+
+IF NEW.time IS NULL THEN SET NEW.time = NOW();
+END IF;
+
+IF NEW.time > NOW() THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid examination time';
+END IF;
+
+END //
+
+DELIMITER ;
