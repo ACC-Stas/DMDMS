@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import typing as tp
 
+from typing import List
+
 
 class IWindow(ABC):
     def __init__(self, help_desc: str, parent: tp.Optional['IWindow']):
@@ -14,18 +16,19 @@ class IWindow(ABC):
     def set_parent(self, parent):
         self.parent = parent
 
-    def handle_command(self, command: list[tp.Any]) -> None:
+    def handle_command(self, command: List[tp.Any]) -> None:
         if len(command) == 0:
             print("EMPTY COMMAND")
             return
 
         try:
             func = getattr(self, command[0])
+            func(*command[1:])
         except AttributeError:
             print(f"Don't have such command: {command[0]}")
             return
-
-        func(*command[1:])
+        except TypeError:
+            print(f'Invalid arguments for {command[0]}: {command[1:]}')
 
     @abstractmethod
     def run(self) -> None:

@@ -1,3 +1,5 @@
+from typing import List
+
 from .IWindow import IWindow
 from .CommandGetter import CommandGetter
 import typing as tp
@@ -10,10 +12,10 @@ from lab6.DBConnection import DataBase  # noqa
 
 
 class CRUDWindow(IWindow):
-    def __init__(self, table_name: str, insert_columns: tp.Optional[list[str]] = None,
-                 update_columns: tp.Optional[list[str]] = None,  # last one is used as where cond = val
+    def __init__(self, table_name: str, insert_columns: tp.Optional[List[str]] = None,
+                 update_columns: tp.Optional[List[str]] = None,  # last one is used as where cond = val
                  delete_column: tp.Optional[str] = None,
-                 select_columns: tp.Optional[list[str]] = None,
+                 select_columns: tp.Optional[List[str]] = None,
                  help_desc=None, parent=None):
         if help_desc is None:
             help_desc = f'Enter \n Here you can do CRUD on {table_name}'

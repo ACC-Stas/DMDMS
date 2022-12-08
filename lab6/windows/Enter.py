@@ -49,6 +49,8 @@ class Enter(IWindow):
             record = self.db.cursor.fetchone()
             print("You're connected to database: ", record)
 
+            self.db.cursor.execute("SET autocommit=0;")
+
         except Error as e:
             print("Error while connecting to MySQL", e)
             return
