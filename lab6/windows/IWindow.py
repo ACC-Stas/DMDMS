@@ -24,7 +24,7 @@ class IWindow(ABC):
         try:
             func = getattr(self, command[0])
             func(*command[1:])
-        except AttributeError:
+        except AttributeError as e:
             print(f"Don't have such command: {command[0]}")
             return
         except TypeError:

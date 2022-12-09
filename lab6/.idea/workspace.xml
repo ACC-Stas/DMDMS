@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="517527e5-9786-451d-8cc3-55febf22b256" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/windows/ProceduresWindow.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/windows/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab5/roles.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../lab5/roles.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/lab6.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lab6.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/CRUDWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows/CRUDWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/CommandGetter.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows/CommandGetter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/CreateUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows/CreateUser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/Enter.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows/Enter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows/IWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows/IWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/ProceduresWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows/ProceduresWindow.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,17 +58,33 @@
       <workItem from="1669997723027" duration="408000" />
       <workItem from="1669998340527" duration="524000" />
       <workItem from="1670000558412" duration="368000" />
-      <workItem from="1670503051448" duration="20884000" />
+      <workItem from="1670503051448" duration="27501000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/windows/ProceduresWindow.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/windows/ProceduresWindow.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/lab6$ListWindow.coverage" NAME="ListWindow Coverage Results" MODIFIED="1670504898424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/windows" />
     <SUITE FILE_PATH="coverage/lab6$CreateUser.coverage" NAME="CreateUser Coverage Results" MODIFIED="1670517877077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/windows" />
-    <SUITE FILE_PATH="coverage/lab6$main.coverage" NAME="main Coverage Results" MODIFIED="1670530435657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lab6$main.coverage" NAME="main Coverage Results" MODIFIED="1670544350731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lab6$CRUDWindow.coverage" NAME="CRUDWindow Coverage Results" MODIFIED="1670505083227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/windows" />
     <SUITE FILE_PATH="coverage/lab6$IWindow.coverage" NAME="IWindow Coverage Results" MODIFIED="1670505706590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/windows" />
     <SUITE FILE_PATH="coverage/lab6$CommandGetter.coverage" NAME="CommandGetter Coverage Results" MODIFIED="1670504877923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/windows" />

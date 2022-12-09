@@ -2,6 +2,7 @@ from windows.Enter import Enter
 from windows.ListWindow import ListWindow
 from windows.CRUDWindow import CRUDWindow
 from windows.CreateUser import CreateUser
+from windows.ProceduresWindow import ProceduresWindow
 
 
 address_CRUD = CRUDWindow('Address',
@@ -103,6 +104,20 @@ invoice_CRUD = CRUDWindow('Invoice',
 
 user_creator = CreateUser()
 
+procedures = {
+    "get_clinics_contacts": [],
+    "get_patients": [],
+    "get_patient_examinations": ['patient_id'],
+    "get_treatments": ["examination_id"],
+    "get_patient_debt": ["patient_id"],
+    "get_free_chambers": ["city"],
+    "get_month_clinics_salary": [],
+    "get_centers_patients_number": [],
+    "get_chambers": []
+}
+
+proc_window = ProceduresWindow("Here you can run procedures", procedures)
+
 windows_dict = {'Address': address_CRUD,
                 'FullName': fullname_CRUD,
                 'Contact': contact_CRUD,
@@ -117,6 +132,7 @@ windows_dict = {'Address': address_CRUD,
                 'Treatment': treatment_CRUD,
                 'Invoice': invoice_CRUD,
                 'CreateUser': user_creator,
+                'Procedures': proc_window
                 }
 
 main_window = ListWindow('Main', windows=windows_dict)
